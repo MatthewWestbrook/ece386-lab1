@@ -3,6 +3,7 @@ TODO: Insert what this program does here.
 """
 
 import sys
+import requests
 
 
 def get_img_prediction(
@@ -10,7 +11,12 @@ def get_img_prediction(
 ) -> str:
     """Send image to server for prediction."""
     # TODO: Replace with code to send image to server
-    return ""
+    ipAddress = f"{server_ip}':'{server_port}{api_path}"
+    files = {'file': open(image_path,'rb')}
+    r = requests.post(ipAddress,files=files)
+    return r.text
+    # we want to post an HTTP request to the server
+
 
 
 def main(server_ip: str, server_port: int) -> None:
@@ -19,7 +25,17 @@ def main(server_ip: str, server_port: int) -> None:
     Then display the result to the user.
     """
     # TODO: Replace with prompt to user and call to get_img_prediction
-    print(f"Using server {server_ip}:{server_port}")
+    ipAddress = sys.argv[1]
+    port = sys.argv[2]
+
+    while(input != "exit"):
+        img_path = input("Please enter the path to an image: ")
+        print(f"Using server {server_ip}:{server_port}")
+        text = get_img_prediction(ipAddress,port,"/predict",image_path)
+        print(f"The result of the prediction is: {text}\n")
+
+    print("Goodbye!\n")
+    
 
 
 if __name__ == "__main__":
