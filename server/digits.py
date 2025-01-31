@@ -11,20 +11,20 @@ from tensorflow.keras.saving import load_model  # type: ignore[import]
 from PIL import Image
 from io import BytesIO
 from typing import Annotated
-from fastapi import FastAPI, File
+from fastapi import FastAPI, File, UploadFile
 
 import numpy as np
 
 model_path: str = "digits.keras"
 # TODO: Open saved Keras model as global variable. NO TYPE HINT REQUIRED!
-file_object = open(model_path, "r")
+file_object = load_model(model_path, "r")
 
 # TODO: Create FastAPI App as global variable
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the server!"}
+    return {"message": "Welcome to the server! Nice to see you"}
 
 def image_to_np(image_bytes: bytes) -> np.ndarray:
     """Convert image to proper numpy array"""
@@ -39,7 +39,14 @@ def image_to_np(image_bytes: bytes) -> np.ndarray:
     return image_array
 
 
+# # TODO: Define predict POST function
+# @app.post("/predict")
+# async def get_request(img: Annotated[list[bytes], File()]):
+#     prediction = file_object.predict(img)
+#     return {"image prediction:": prediction}
+
 # TODO: Define predict POST function
 @app.post("/predict")
-def get_request(img: Annotated[list[bytes], File()]) -> int:
-    return {"file_sizes": [len(img)]}
+async def get_request(img: Annotated[list[bytes], File()]):
+    prediction = file_object.predict(img)
+    return {"image prediction:": prediction}
