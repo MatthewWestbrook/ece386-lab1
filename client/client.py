@@ -30,8 +30,9 @@ def main(server_ip: str, server_port: int) -> None:
 
     while(input != "exit"):
         img_path = input("Please enter the path to an image: ")
+        api_path = "/predict"
         print(f"Using server {server_ip}:{server_port}")
-        text = get_img_prediction(ipAddress,port,"/predict",img_path)
+        text = get_img_prediction(ipAddress,port,api_path,img_path)
         print(f"The result of the prediction is: {text}\n")
 
     print("Goodbye!\n")
