@@ -15,11 +15,10 @@ def get_img_prediction(
     """Send image to server for prediction."""
     # TODO: Replace with code to send image to server
     ipAddress = f"http://{server_ip}:{server_port}{api_path}"
-    files = {'img': open(image_path,'rb')}
-    r = requests.post(ipAddress,files=files)
+    files = {"img": open(image_path, "rb")}
+    r = requests.post(ipAddress, files=files)
     return r.text
     # we want to post an HTTP request to the server
-
 
 
 def main(server_ip: str, server_port: int) -> None:
@@ -32,18 +31,17 @@ def main(server_ip: str, server_port: int) -> None:
     # server_port = sys.argv[2]
     img_path = "default"
     exitFlag = 1
-    while(exitFlag):
+    while exitFlag:
         img_path = input("Please enter the path to an image: ")
-        if(img_path != "exit"):
+        if img_path != "exit":
             api_path = "/predict"
             print(f"Using server {server_ip}:{server_port}")
-            text = get_img_prediction(server_ip,server_port,api_path,img_path)
+            text = get_img_prediction(server_ip, server_port, api_path, img_path)
             print(f"{text}\n")
         else:
             exitFlag = 0
 
     print("Goodbye!\n")
-    
 
 
 if __name__ == "__main__":
