@@ -42,7 +42,7 @@ def image_to_np(image_bytes: bytes) -> np.ndarray:
     # TODO: convert image to numpy array of shape model expects
     image_array = np.array(resized_image)
 
-    # we were getting some issues with batch size, so I manually added it
+    # we were getting some issues with batch size, so we manually added it
     image_array = image_array.reshape((1, 28, 28))
 
     return image_array
@@ -60,10 +60,10 @@ def image_to_np(image_bytes: bytes) -> np.ndarray:
 async def get_request(img: Annotated[List[bytes], File()]) -> dict:
     np_img = np.vstack([image_to_np(image) for image in img])
 
-    print(f"initial batch shape: {np_img.shape}")
+    print(f"initial batch shape: {np_img.shape} (should be (1x28x28))")
     prediction = file_object.predict(np_img)
 
     # this came from chat gpt - documented
-    predicted_label = np.argmax(prediction, axis=1).tolist()
+    predicted_label = np.argmax(prediction, axis=-1).tolist()
 
     return {"image prediction:": predicted_label}
