@@ -14,7 +14,7 @@ See [USAFA ECE 386: AI Hardware Applications - Lab 1](https://usafa-ece.github.i
 *Answer the following questions. Strive to be articulate.*
 
 ### What strategies did you use to ensure that your client and server where communicating with the same schema?
-We used a lot of print statements priting the size of our data to ensure they were talking using the same size variables. These print statements were SO useful because we had a ton of formatting issues where our img_to_numpy
+We used a lot of print statements printing the size of our data to ensure they were talking using the same size variables. These print statements were SO useful because we had a ton of formatting issues where our img_to_numpy
 function was not doing exactly what we needed. The print statements helped us find we were not inlcuding a batch size
 and that needed to change. 
 
