@@ -22,7 +22,7 @@ and that needed to change.
 Our inital thought was that our server would be able to scale to any picture of a digit really well. We definately thought it would scale a lot more than it actually did. As we got further into the lab, we realized our inital thought may not be the case. When we tested our model, we found out that our server did not scale well to any picture of a digit. When we edited the image for different results, errors were still produced but with misidentifying different numbers. For example, it would see the number 5 and identify this number as a 3. 
 
 ### Does the client/server architecture make sense for this problem? Why or why not?
-Yes, the client/server architecture does make sense for this problem. theThe role of the client is to post a request while the role of the server to accept the rest. In this problem, the client will post a request to the server providing pre-produced images. Then the server will accept the a POST request to predict the digit in that image. 
+Yes, the client/server architecture does make sense for this problem. The role of the client is to post a request while the role of the server to accept the rest. In this problem, the client will post a request to the server providing pre-produced images. Then the server will accept the a POST request to predict the digit in that image. This worked well since it introduced us to server/client relationships and how to ensure communication between them is seamless. 
 
 ## Documentation
 https://fastapi.tiangolo.com/tutorial/request-forms-and-files/#import-file-and-form
